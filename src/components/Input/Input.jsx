@@ -17,12 +17,12 @@ class Input extends Component {
   }
 }
 
-Input.prototype = {
-  className: PropTypes.string,
+Input.propTypes = {
+  className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   datatestid: PropTypes.string.isRequired,
 };
 
