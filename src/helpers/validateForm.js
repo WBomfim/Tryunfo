@@ -1,7 +1,16 @@
+const validadeNegativeNumber = (state) => {
+  const { cardAttr1, cardAttr2, cardAttr3 } = state;
+  if (cardAttr1 < 0 || cardAttr2 < 0 || cardAttr3 < 0) {
+    return false;
+  }
+  return true;
+};
+
 const sumValidate = (state) => {
   const { cardAttr1, cardAttr2, cardAttr3 } = state;
+  const numberNegative = validadeNegativeNumber(state);
   const maxSum = 210;
-  if (cardAttr1 + cardAttr2 + cardAttr3 <= maxSum) {
+  if (cardAttr1 + cardAttr2 + cardAttr3 <= maxSum && numberNegative) {
     return true;
   }
   return false;
