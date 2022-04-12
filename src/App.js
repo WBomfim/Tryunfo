@@ -29,10 +29,23 @@ class App extends Component {
     }
   }
 
+  changeBoll = () => {
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo === false) {
+      return true;
+    }
+    return false;
+  }
+
   handleChange = (event) => {
+    console.log(event.target.value);
     const { name } = event.target;
     const value = event.target === 'checkbox' ? event.target.checked : event.target.value;
-    this.setState({ [name]: value === 'on' ? true : value }, () => this.validateForm());
+    this.setState({
+      [name]: value === 'on'
+        ? this.changeBoll()
+        : value,
+    }, () => this.validateForm());
   }
 
   saveCard = () => {
@@ -57,6 +70,7 @@ class App extends Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
+      cardTrunfo: false,
     }));
   }
 
