@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../Input/Input';
+import Input from './Input';
 
 class Form extends Component {
   render() {
@@ -104,7 +104,7 @@ class Form extends Component {
               name="cardTrunfo"
               checked={ cardTrunfo }
               onChange={ onInputChange }
-              datatestid="trunfo-input"
+              data-testid="trunfo-input"
             />
             Super Trybe Trunfo
           </label>

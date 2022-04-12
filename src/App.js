@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Form from './components/Form/Form';
-import Card from './components/Card/Card';
+import Form from './components/Form';
+import Card from './components/Card';
 import validateInformations from './helpers/validateForm';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
       cardAttr2: '',
       cardAttr3: '',
       cardImage: '',
-      cardRare: 'normal',
+      cardRare: '',
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
@@ -23,14 +23,15 @@ class App extends Component {
   validateForm = () => {
     if (validateInformations(this.state)) {
       this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
     }
   }
 
   handleChange = (event) => {
     const { name } = event.target;
     const value = event.target === 'checkbox' ? event.target.checked : event.target.value;
-    this.validateForm();
-    this.setState({ [name]: value === 'on' ? true : value });
+    this.setState({ [name]: value === 'on' ? true : value }, () => this.validateForm());
   }
 
   render() {
