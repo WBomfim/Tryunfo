@@ -97,16 +97,6 @@ class Form extends Component {
               <option value="muito raro">muito raro</option>
             </select>
           </label>
-          <Input
-            lableText="Super Trybe Trunfo"
-            id="super-trybe-trunfo"
-            className="input_checkbox"
-            type="checkbox"
-            name="super-trybe-trunfo"
-            value="aguardando"
-            onChange={ this.aguardando }
-            datatestid="trunfo-input"
-          />
           <label htmlFor="super-trybe-trunfo">
             <input
               id="super-trybe-trunfo"
@@ -115,6 +105,7 @@ class Form extends Component {
               onChange={ onInputChange }
               datatestid="trunfo-input"
             />
+            Super Trybe Trunfo
           </label>
           <button
             type="button"
@@ -133,9 +124,9 @@ class Form extends Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  cardAttr1: PropTypes.number.isRequired,
-  cardAttr2: PropTypes.number.isRequired,
-  cardAttr3: PropTypes.number.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
