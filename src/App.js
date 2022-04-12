@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './components/Form/Form';
 import Card from './components/Card/Card';
+import validateForm from './helpers/validateForm';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class App extends Component {
   }
 
   handleChange = (event) => {
-    console.log(event.target.value);
     const { name } = event.target;
     const value = event.target === 'checkbox' ? event.target.checked : event.target.value;
     this.setState({ [name]: value === 'on' ? true : value });
