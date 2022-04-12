@@ -17,6 +17,7 @@ class App extends Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      salvedCards: [],
     };
   }
 
@@ -32,6 +33,31 @@ class App extends Component {
     const { name } = event.target;
     const value = event.target === 'checkbox' ? event.target.checked : event.target.value;
     this.setState({ [name]: value === 'on' ? true : value }, () => this.validateForm());
+  }
+
+  saveCard = () => {
+    const { state } = this;
+    const card = {
+      cardName: state.cardName,
+      cardDescription: state.cardDescription,
+      cardAttr1: state.cardAttr1,
+      cardAttr2: state.cardAttr2,
+      cardAttr3: state.cardAttr3,
+      cardImage: state.cardImage,
+      cardRare: state.cardRare,
+      cardTrunfo: state.cardTrunfo,
+    };
+
+    this.setState((prevState) => ({
+      salvedCards: [...prevState.salvedCards, card],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+    }));
   }
 
   render() {
@@ -62,6 +88,7 @@ class App extends Component {
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handleChange }
+          onSaveButtonClick={ this.saveCard }
         />
         <Card
           cardName={ cardName }
