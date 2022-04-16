@@ -29,20 +29,13 @@ class App extends Component {
     }
   }
 
-  changeBoll = () => {
-    const { cardTrunfo } = this.state;
-    if (cardTrunfo === false) {
-      return true;
-    }
-    return false;
-  }
-
   handleChange = (event) => {
     const { name } = event.target;
+    const { cardTrunfo } = this.state;
     const value = event.target === 'checkbox' ? event.target.checked : event.target.value;
     this.setState({
       [name]: value === 'on'
-        ? this.changeBoll()
+        ? !cardTrunfo
         : value,
     }, () => this.validateForm());
   }
