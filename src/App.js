@@ -22,11 +22,9 @@ class App extends Component {
   }
 
   validateForm = () => {
-    if (validateInformations(this.state)) {
-      this.setState({ isSaveButtonDisabled: false });
-    } else {
-      this.setState({ isSaveButtonDisabled: true });
-    }
+    const informations = this.state;
+    const validate = !validateInformations(informations);
+    this.setState({ isSaveButtonDisabled: validate });
   }
 
   handleChange = (event) => {
