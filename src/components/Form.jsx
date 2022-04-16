@@ -20,7 +20,7 @@ class Form extends Component {
     } = this.props;
 
     return (
-      <div className="Form_page">
+      <div className="form-page">
         <h1>Adicionar nova carta</h1>
         <form className="Form">
           <Input

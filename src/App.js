@@ -99,33 +99,35 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.handleChange }
-          onSaveButtonClick={ this.saveCard }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <div>
+        <div className="insert-card">
+          <Form
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            hasTrunfo={ hasTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onInputChange={ this.handleChange }
+            onSaveButtonClick={ this.saveCard }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+        </div>
+        <div className="saved-card">
           { salvedCards.map((card) => (
-            <div key={ card.cardName }>
+            <div key={ card.cardName } className="card-save">
               <Card
                 cardName={ card.cardName }
                 cardDescription={ card.cardDescription }
@@ -136,16 +138,14 @@ class App extends Component {
                 cardRare={ card.cardRare }
                 cardTrunfo={ card.cardTrunfo }
               />
-              <div>
-                <button
-                  name={ card.cardName }
-                  type="button"
-                  onClick={ this.removeCard }
-                  data-testid="delete-button"
-                >
-                  Excluir
-                </button>
-              </div>
+              <button
+                name={ card.cardName }
+                type="button"
+                onClick={ this.removeCard }
+                data-testid="delete-button"
+              >
+                Excluir
+              </button>
             </div>
           ))}
         </div>
