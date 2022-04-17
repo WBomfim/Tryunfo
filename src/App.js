@@ -18,6 +18,8 @@ class App extends Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       salvedCards: [],
+      search: '',
+      filterCard: [],
     };
   }
 
@@ -46,6 +48,7 @@ class App extends Component {
     } else {
       this.setState({ hasTrunfo: false }, () => this.validateForm());
     }
+    this.filterCard();
   }
 
   saveCard = () => {
@@ -82,6 +85,16 @@ class App extends Component {
     }, () => this.checkCardTrunfo());
   }
 
+  filterCard = () => {
+    const { search, salvedCards } = this.state;
+    if (search.length > 0) {
+      const filter = salvedCards.filter((card) => card.cardName.includes(search));
+      this.setState({ filterCard: filter });
+    } else {
+      this.setState({ filterCard: salvedCards });
+    }
+  }
+
   render() {
     const {
       cardName,
@@ -94,7 +107,8 @@ class App extends Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
-      salvedCards,
+      search,
+      filterCard,
     } = this.state;
 
     return (
@@ -126,7 +140,28 @@ class App extends Component {
           />
         </div>
         <div className="saved-card">
-          { salvedCards.map((card) => (
+          <div className="search-card">
+            <h2>Todas as Cartas</h2>
+            <label htmlFor="search">
+              Filtros de Busca
+              <input
+                id="search"
+                type="text"
+                name="search"
+                value={ search }
+                onChange={ this.handleChange }
+                onKeyUp={ this.filterCard }
+                data-testid="name-filter"
+              />
+            </label>
+            <button
+              type="button"
+              onClick={ this.filterCard }
+            >
+              Buscar
+            </button>
+          </div>
+          { filterCard.map((card) => (
             <div key={ card.cardName } className="card-save">
               <Card
                 cardName={ card.cardName }
