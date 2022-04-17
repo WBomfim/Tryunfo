@@ -20,6 +20,7 @@ class App extends Component {
       salvedCards: [],
       search: '',
       filterCard: [],
+      filterType: 'todas',
     };
   }
 
@@ -27,6 +28,7 @@ class App extends Component {
     const informations = this.state;
     const validate = !validateInformations(informations);
     this.setState({ isSaveButtonDisabled: validate });
+    this.filterCard();
   }
 
   handleChange = (event) => {
@@ -85,10 +87,19 @@ class App extends Component {
     }, () => this.checkCardTrunfo());
   }
 
+  filterTypeCard = (search) => {
+    const { salvedCards, filterType } = this.state;
+    if (filterType === 'todas') {
+      return salvedCards.filter((card) => card.cardName.includes(search));
+    }
+    return salvedCards.filter((card) => card.cardName.includes(search))
+      .filter((card) => card.cardRare === filterType);
+  }
+
   filterCard = () => {
-    const { search, salvedCards } = this.state;
-    if (search.length > 0) {
-      const filter = salvedCards.filter((card) => card.cardName.includes(search));
+    const { search, salvedCards, filterType } = this.state;
+    if (search.length > 0 || filterType !== 'todas') {
+      const filter = this.filterTypeCard(search);
       this.setState({ filterCard: filter });
     } else {
       this.setState({ filterCard: salvedCards });
@@ -109,6 +120,7 @@ class App extends Component {
       isSaveButtonDisabled,
       search,
       filterCard,
+      filterType,
     } = this.state;
 
     return (
@@ -154,6 +166,17 @@ class App extends Component {
                 data-testid="name-filter"
               />
             </label>
+            <select
+              name="filterType"
+              value={ filterType }
+              onChange={ this.handleChange }
+              data-testid="rare-filter"
+            >
+              <option value="todas">todas</option>
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muito raro">muito raro</option>
+            </select>
             <button
               type="button"
               onClick={ this.filterCard }
