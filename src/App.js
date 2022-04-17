@@ -21,6 +21,7 @@ class App extends Component {
       search: '',
       filterCard: [],
       filterType: 'todas',
+      filterTrunfo: false,
     };
   }
 
@@ -97,13 +98,21 @@ class App extends Component {
   }
 
   filterCard = () => {
-    const { search, salvedCards, filterType } = this.state;
-    if (search.length > 0 || filterType !== 'todas') {
+    const { search, salvedCards, filterType, filterTrunfo } = this.state;
+    if (filterTrunfo) {
+      const filter = salvedCards.filter((card) => card.cardTrunfo);
+      this.setState({ filterCard: filter });
+    } else if (search.length > 0 || filterType !== 'todas') {
       const filter = this.filterTypeCard(search);
       this.setState({ filterCard: filter });
     } else {
       this.setState({ filterCard: salvedCards });
     }
+  }
+
+  selectFilterTrunfo = () => {
+    const { filterTrunfo } = this.state;
+    this.setState({ filterTrunfo: !filterTrunfo }, () => this.filterCard());
   }
 
   render() {
@@ -121,6 +130,7 @@ class App extends Component {
       search,
       filterCard,
       filterType,
+      filterTrunfo,
     } = this.state;
 
     return (
@@ -163,6 +173,7 @@ class App extends Component {
                 value={ search }
                 onChange={ this.handleChange }
                 onKeyUp={ this.filterCard }
+                disabled={ filterTrunfo }
                 data-testid="name-filter"
               />
             </label>
@@ -170,6 +181,7 @@ class App extends Component {
               name="filterType"
               value={ filterType }
               onChange={ this.handleChange }
+              disabled={ filterTrunfo }
               data-testid="rare-filter"
             >
               <option value="todas">todas</option>
@@ -177,6 +189,17 @@ class App extends Component {
               <option value="raro">raro</option>
               <option value="muito raro">muito raro</option>
             </select>
+            <label htmlFor="trunfo">
+              <input
+                id="trunfo"
+                type="checkbox"
+                name="filterTrunfo"
+                checked={ filterTrunfo }
+                onChange={ this.selectFilterTrunfo }
+                data-testid="trunfo-filter"
+              />
+              Super Trunfo
+            </label>
             <button
               type="button"
               onClick={ this.filterCard }
