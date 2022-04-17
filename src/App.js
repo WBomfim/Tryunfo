@@ -164,19 +164,18 @@ class App extends Component {
         <div className="saved-card">
           <div className="search-card">
             <h2>Todas as Cartas</h2>
-            <label htmlFor="search">
-              Filtros de Busca
-              <input
-                id="search"
-                type="text"
-                name="search"
-                value={ search }
-                onChange={ this.handleChange }
-                onKeyUp={ this.filterCard }
-                disabled={ filterTrunfo }
-                data-testid="name-filter"
-              />
-            </label>
+            <h3>Filtros de Busca</h3>
+            <input
+              id="search"
+              type="text"
+              placeholder="Nome da Carta"
+              name="search"
+              value={ search }
+              onChange={ this.handleChange }
+              onKeyUp={ this.filterCard }
+              disabled={ filterTrunfo }
+              data-testid="name-filter"
+            />
             <select
               name="filterType"
               value={ filterType }
